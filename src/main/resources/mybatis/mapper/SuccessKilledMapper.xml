@@ -4,10 +4,35 @@
   <resultMap id="BaseResultMap" type="com.ymgc.qsh.entity.SuccessKilled" >
     <id column="seckill_id" property="seckillId" jdbcType="BIGINT" />
     <id column="user_phone" property="userPhone" jdbcType="BIGINT" />
-    <result column="status" property="status" jdbcType="SHORT" />
+    <result column="status" property="status" jdbcType="SMALLINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
     seckill_id, user_phone, status, create_time
   </sql>
+
+  <insert id="insertSuccessKilled">
+    insert ignore into
+            success_killed(seckill_id,user_phone,status)
+    values (#{seckillId},#{userPhone},0)
+  </insert>
+
+  <!--如果把结果映射到实体-->
+  <!--可以自由控制SQL-->
+  <select id="queryByIdWithSeckill" resultType="SuccessKilled">
+    select sk.seckill_id,
+           sk.user_phone,
+           sk.create_time,
+           sk.status,
+           s.seckill_id "seckill.seckill_id",
+           s.name "seckill.seckill_id",
+           s.number "seckill.number",
+           s.start_time "seckill.start_time",
+           s.end_time "seckill.end_time",
+           s.create_time "seckill.create_time"
+    from success_killed sk
+                    inner join seckill s on sk.seckill_id= s.seckill_id
+    where sk.seckill_id=#{seckillId}
+      and sk.user_phone = #{userPhone}
+  </select>
 </mapper>
