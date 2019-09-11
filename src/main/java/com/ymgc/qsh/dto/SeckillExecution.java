@@ -1,6 +1,7 @@
 package com.ymgc.qsh.dto;
 
 import com.ymgc.qsh.entity.SuccessKilled;
+import com.ymgc.qsh.enums.SeckillStatusEnum;
 
 /**
  * simple description
@@ -25,18 +26,18 @@ public class SeckillExecution {
     private SuccessKilled successKilled;
 
     //成功情况下返回
-    public SeckillExecution(long seckillId, int status, String statusInfo, SuccessKilled successKilled) {
+    public SeckillExecution(long seckillId, SeckillStatusEnum seckillStatusEnum, SuccessKilled successKilled) {
         this.seckillId = seckillId;
-        this.status = status;
-        this.statusInfo = statusInfo;
+        this.status = seckillStatusEnum.getStatus();
+        this.statusInfo = seckillStatusEnum.getStatusInfo();
         this.successKilled = successKilled;
     }
 
     //失败情况下
-    public SeckillExecution(long seckillId, int status, String statusInfo) {
+    public SeckillExecution(long seckillId, SeckillStatusEnum seckillStatusEnum) {
         this.seckillId = seckillId;
-        this.status = status;
-        this.statusInfo = statusInfo;
+        this.status = seckillStatusEnum.getStatus();
+        this.statusInfo = seckillStatusEnum.getStatusInfo();
     }
 
     public long getSeckillId() {

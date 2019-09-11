@@ -4,6 +4,7 @@ import com.ymgc.qsh.dto.Exposer;
 import com.ymgc.qsh.dto.SeckillExecution;
 import com.ymgc.qsh.entity.Seckill;
 import com.ymgc.qsh.entity.SuccessKilled;
+import com.ymgc.qsh.enums.SeckillStatusEnum;
 import com.ymgc.qsh.exception.RepeatKillException;
 import com.ymgc.qsh.exception.SeckillCloseException;
 import com.ymgc.qsh.exception.SeckillException;
@@ -13,6 +14,7 @@ import com.ymgc.qsh.service.SeckillService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.util.Date;
@@ -27,6 +29,7 @@ import java.util.List;
  * @Version: 1.0
  * <p>Copyright: 内蒙古金财信息技术有限公司 (c) 2019</p>
  */
+@Service
 public class SeckillServiceImpl implements SeckillService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -84,7 +87,7 @@ public class SeckillServiceImpl implements SeckillService {
                     throw new RepeatKillException("seckill repeat");
                 } else {
                     SuccessKilled successKilled = successKilledMapper.queryByIdWithSeckill(seckillId, userPhone);
-                    return new SeckillExecution(seckillId, 1, "秒杀成功", successKilled);
+                    return new SeckillExecution(seckillId, SeckillStatusEnum.SUCCESS, successKilled);
                 }
             }
         } catch (SeckillCloseException e) {

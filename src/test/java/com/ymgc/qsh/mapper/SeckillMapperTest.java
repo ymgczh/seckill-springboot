@@ -1,7 +1,6 @@
 package com.ymgc.qsh.mapper;
 
 import com.ymgc.qsh.QshApplication;
-import com.ymgc.qsh.QshApplicationTests;
 import com.ymgc.qsh.entity.Seckill;
 import org.junit.Test;
 import org.junit.runner.RunWith;
