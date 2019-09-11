@@ -8,6 +8,10 @@ spring:
       auto-commit: false
       maximum-pool-size: 30
       connection-timeout: 10000
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
   configuration:
@@ -16,5 +20,3 @@ mybatis:
     use-column-label: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   type-aliases-package: com.ymgc.qsh.entity
-# 1 获取数据库自增主键
-# 2 使用列别名替换列明
